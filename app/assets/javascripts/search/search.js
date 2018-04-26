@@ -313,7 +313,7 @@ jQuery(document).ready(function($) {
 	   if (typeof str === "undefined") {
 	     return str;
 	   }
-		str = str.replace(/[^0-9A-Za-z\-'"\u00C0-\u017F]/g, ' ');
+		str = str.replace(/[^0-9A-Za-z\-'"\u00C0-\u017F*]/g, ' ');
 		while (str.substr(0,1) === "'")
 			str = str.substr(1);
 		str = str.replace(/ '/g,' '); // Allow an apostrophe inside a word, but not at the beginning of a word.
@@ -323,7 +323,7 @@ jQuery(document).ready(function($) {
 
    window.collex.formatYearString = function(term) {
       // correctly format year search, replace dash or "to" with "TO" and add leading zeros to years if necessary
-      term = term.trim().replace(/-/, ' TO ').replace(/to/i, 'TO').replace(/\s+/, ' ');
+      term = term.trim().replace(/-/, ' TO ').replace(/to/i, 'TO').replace(/now/i, 'NOW').replace(/\s+/, ' ');
       term = term.replace(/(\b\d{3})\b/g, '0$1'); // replace 1, 2, or 3 digit numbers with 4 digit versions by adding leading zeros
       term = term.replace(/(\b\d{2})\b/g, '00$1');
       term = term.replace(/(\b\d{1})\b/g, '000$1');
@@ -495,4 +495,3 @@ jQuery(document).ready(function($) {
 
 	initializeSearch();
 });
-

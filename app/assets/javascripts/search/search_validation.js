@@ -106,7 +106,8 @@ jQuery(document).ready(function($) {
 				// At this point, year_val contains the user's input for the year.
 				// Make sure it is 4 digits or a valid solr span (e.g. 1700 TO 1900)
 
-				var re = /^\d{4}(\s+TO\s+\d{4})?$/;
+				// var re = /^\d{4}(\s+TO\s+\d{4})?$/;
+        var re = /^(\d{4}|\*)(\s+TO\s+(\d{4}|NOW))?$/;
 
 				if (!re.match(year)) {
 					errorDlg("The year must be 4 digits or a valid year span (e.g. 1700 TO 1900).");
@@ -129,4 +130,3 @@ jQuery(document).ready(function($) {
 		return false;
 	});
 });
-

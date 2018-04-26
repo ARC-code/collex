@@ -248,3 +248,14 @@ span.tooltip:hover span.result_row_tooltip {
 	color: black;
 }
 }
+
+.permalink-mode {
+	div.search_result_header {
+		font-size: 1.8em;
+		line-height: 30px;
+		margin-bottom: 0.5em;
+	}
+	div.search_result_data_container {
+		font-size: 1.2em;
+	}
+}

@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------
 //    Copyright 2009 Applied Research in Patacriticism and the University of Virginia
-//    
+//
 //    Licensed under the Apache License, Version 2.0 (the "License");
 //    you may not use this file except in compliance with the License.
 //    You may obtain a copy of the License at
-//  
+//
 //        http://www.apache.org/licenses/LICENSE-2.0
-//  
+//
 //    Unless required by applicable law or agreed to in writing, software
 //    distributed under the License is distributed on an "AS IS" BASIS,
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,7 @@
 /*global ForumLicenseDisplay */
 /*global document */
 /*global submitForm, submitFormWithConfirmation */
-/*extern collapseAllItems, toggleItemExpand, ResultRowDlg, StartDiscussionWithObject, bulkCollect, bulkUncollect, bulkTag, bulk_checked, doAddTag, doAddToExhibit, doAnnotation, doCollect, doRemoveCollect, doRemoveTag, encodeForUri, expandAllItems, realLinkToEditorLink, removeHidden, tagFinishedUpdating, toggleAllBulkCollectCheckboxes */
+/*extern collapseAllItems, toggleItemExpand, ResultRowDlg, StartDiscussionWithObject, bulkCollect, bulkUncollect, bulkTag, bulk_checked, doAddTag, doAddToExhibit, doShowPermalink, doAnnotation, doCollect, doRemoveCollect, doRemoveTag, encodeForUri, expandAllItems, realLinkToEditorLink, removeHidden, tagFinishedUpdating, toggleAllBulkCollectCheckboxes */
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -57,7 +57,7 @@ var ResultRowDlg = Class.create({
 		//var This = this;
 		var dlg = null;
 		var obj = '';
-		
+
 		// private functions
 		var ajax_params = extra_button_data;
 		ajax_params.uri = uri;
@@ -82,7 +82,7 @@ var ResultRowDlg = Class.create({
 			};
 			serverRequest({ url: populate_action, params: ajax_params, onSuccess: onSuccess});
 		};
-		
+
 		// privileged functions
 		var dlgLayout = {
 				page: 'layout',
@@ -91,7 +91,7 @@ var ResultRowDlg = Class.create({
 					[ { rowClass: 'gd_last_row' }, { button: 'Cancel', callback: GeneralDialog.cancelCallback, isDefault: true } ]
 				]
 			};
-		
+
 		var params = { this_id: "result_row_dlg", pages: [ dlgLayout ], body_style: "result_row_dlg", row_style: "result_row_row", title: "Object Details" };
 		dlg = new GeneralDialog(params);
 		//dlg.changePage('layout', null);
@@ -146,13 +146,13 @@ function bulkCollect(autocompleteUrl)
       initialize: function ( params ) {
          var title = params.title;
          var addAction = params.addAction;
-         var skipAction = params.skipAction; 
+         var skipAction = params.skipAction;
          var dlg = null;
          var id='tag[name]';
          var msg = 'Your objects have been collected. Would you like to add a tag to the batch?';
          var prompt = 'Tag:';
          var hint = 'Add multiple tags by separating them with a comma (e.g. painting, visual_art)';
-         
+
          // privileged functions
          this.add = function(event, addParams)
          {
@@ -165,24 +165,24 @@ function bulkCollect(autocompleteUrl)
          {
             skipParams.dlg.cancel();
             skipAction();
-         };  
-  
+         };
+
          var dlgLayout = {
             page: 'layout',
-            rows: 
+            rows:
             [
                [{text: msg, klass: 'gd_text_input_dlg_label'}],
-               [ { text: prompt, klass: 'gd_text_input_dlg_label' }, 
+               [ { text: prompt, klass: 'gd_text_input_dlg_label' },
                  { autocomplete: id, klass: 'new_exhibit_autocomplete', url: autocompleteUrl, token: ','} ],
-               [ {text: hint, id: "gd_postExplanation", klass: 'gd_text_input_help'}], 
-               [ { rowClass: 'gd_last_row'}, 
-                 {button: "Add Tags", callback: this.add, isDefault: true}, 
+               [ {text: hint, id: "gd_postExplanation", klass: 'gd_text_input_help'}],
+               [ { rowClass: 'gd_last_row'},
+                 {button: "Add Tags", callback: this.add, isDefault: true},
                  {button: 'Skip Tags', callback: this.skip} ]
             ]
          };
          dlgLayout.rows.push();
-         
-         var dlgparams = {this_id: "gd_text_input_dlg", pages: [ dlgLayout ], body_style: "gd_message_box_dlg", row_style: "gd_message_box_row", 
+
+         var dlgparams = {this_id: "gd_text_input_dlg", pages: [ dlgLayout ], body_style: "gd_message_box_dlg", row_style: "gd_message_box_row",
             title: title, focus: GeneralDialog.makeId(id)};
          dlg = new GeneralDialog(dlgparams);
          dlg.center();
@@ -202,9 +202,9 @@ function bulkCollect(autocompleteUrl)
 	}
 
 	if (has_one)
-	{  
+	{
 	   var tagAction = function(tagName)
-      {   
+      {
          var ele = $('bulk_tag_text');
          ele.value = tagName;
          submitForm("bulk_collect_form", "/results/bulk_collect", "post");
@@ -213,7 +213,7 @@ function bulkCollect(autocompleteUrl)
       {
          submitForm("bulk_collect_form", "/results/bulk_collect", "post");
       };
-      
+
       new BulkTagDlg({title:"Tag Selections", addAction: tagAction, skipAction:noTagAction});
 	}
 	else
@@ -226,20 +226,20 @@ function bulkUncollect()
 {
 	var checkboxes = Form.getInputs('bulk_collect_form', 'checkbox');
 	var has_one = false;
-	for (var i = 0; i < checkboxes.length; i++) 
+	for (var i = 0; i < checkboxes.length; i++)
 	{
 		var checkbox = checkboxes[i];
-		if (checkbox.checked) 
+		if (checkbox.checked)
 		{
 			has_one = true;
 			break;
 		}
 	}
-	
+
 	if (has_one)
 	{
 			submitFormWithConfirmation({id:"bulk_collect_form", action:"/results/bulk_uncollect",
-        title:"Remove Selected Objects from Collection?", 
+        title:"Remove Selected Objects from Collection?",
         message:"Are you sure you wish to remove the selected objects from your collection?"});
 	}
 	else
@@ -303,7 +303,7 @@ function toggleItemExpand()
       col.style.display = 'none';
       collapseAllItems();
    }
-   
+
 }
 
 function doCollect(partial, uri, row_num, row_id, is_logged_in, hasEdit)
@@ -580,3 +580,8 @@ function doAddToExhibit(partial, uri, index, row_id, my_collex_url)
 	}
 }
 
+function doShowPermalink(uri) {
+	var url = History.getBaseUrl() + "search?uri=" + window.escape(uri) + '&perm';
+	new MessageBoxDlg('Permalink', '<input class="link_dlg_input_long permalink_field" onClick="this.select();" type="text" value="' + url + '"></input>');
+	document.getElementsByClassName('permalink_field')[0].select();
+}

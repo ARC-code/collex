@@ -44,7 +44,7 @@
 			  </div>
 		  <% end %>
 		  <div class="search_help_icon">
-			<a href="/about/help/" class="tooltip"><%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 18, style: "padding-left:5px"}) %>
+			<a href="/about/help/" class="tooltip"><%= SKIN == 'near' ? image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) : image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 18, style: "padding-left:5px"}) %>
 			  <span class="search_help_tooltip"><b>Need help?</b><br/>Click to learn more about searching
 			in <%= Setup.site_name() %>.</span></a>
 		  </div>
@@ -134,9 +134,18 @@
           </tr>
        <% end %>
 		<tr><td colspan='3'><div class="search_help_icon">
-					<a href="/about/help/" class="tooltip"><%= image_tag("#{SKIN}/help_thumb.gif", { alt: 'help', height: 18, style: "padding-left:5px" }) %><span class="search_help_tooltip"><b>Need help?</b><br />Click to learn more about searching in <%= Setup.site_name() %>.</span></a>
+					<a href="/about/help/" class="tooltip"><%= SKIN == 'near' ? image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) : image_tag("#{SKIN}/help_thumb.gif", { alt: 'help', height: 18, style: "padding-left:5px" }) %><span class="search_help_tooltip"><b>Need help?</b><br />Click to learn more about searching in <%= Setup.site_name() %>.</span></a>
 				</div><div class="search_entry_instructions">Other search options:</div></td></tr>
-        <tr><td>Title:</td><td><input name="t" type="text" class="search_entry_box" <%= "value='#{@tphrs}'" if @tphrs %> /></td></tr>
+        <tr><td>Title:</td><td><input name="t" type="text" class="search_entry_box" <%= "value='#{@tphrs}'" if @tphrs %> /></td>
+        <% if SKIN === 'near' %>
+          <td><span class="tooltip advanced_search_field_tooltip">
+            <%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) %>
+            <span class="search_help_tooltip">
+              <b>Search by Title</b><br />[Help text to be completed.]
+            </span>
+          </span></td>
+        <% end %>
+        </tr>
         <% if HAS_FUZZY %>
            <tr>
              <td></td>
@@ -153,13 +162,13 @@
              </td>
            </tr>
         <% end %>
-        <% if ['MESA', 'NEAR'].include? SKIN.upcase %>
+        <% if ['MESA', 'NEAR', 'REKN', 'COLLEX'].include? SKIN.upcase %>
             <tr><td>Role:</td><td><%= select_tag( :search_role_type, options_from_collection_for_select([ ['', '(Select a role)'] ] + @searchable_roles, :first, :last), :class => 'search_role_type' ) %>
-           <input name="search_role" id="search_role" type="text" class="search_entry_box_short" placeholder="Please select a role."/>
+           <input name="search_role" id="search_role" type="text" class="search_entry_box_short" />
             </td>
             <td>
               <span class="tooltip advanced_search_field_tooltip">
-                   <%= image_tag("#{SKIN}/help_thumb.gif", { alt: 'help', height: 13, style: "padding-left:5px" }) %>
+                   <%= SKIN == 'near' ? image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) : image_tag("#{SKIN}/help_thumb.gif", { alt: 'help', height: 13, style: "padding-left:5px" }) %>
                    <span class="search_help_tooltip">
                      <b>Search by Role</b><br />In addition to searching roles, you should also try your search in the key terms field above.
                    </span>
@@ -176,9 +185,53 @@
              <td><%= select_tag( :lang, options_from_collection_for_select([IsoLanguage.new(:english_name => "(Select a language)")] + Catalog.factory_create(false).get_languages(), :alpha3, :first_english_name), :class => 'search_language' ) %></td>
            </tr>
         <% end %>
-        <tr><td>Year (YYYY):</td><td><input id="search_year" name="y" type="text" class="search_entry_box" <%= "value='#{@yphrs}'" if @yphrs %> /></td></tr>
-				<tr><td>Subject:</td><td><input id="search_subject" name="subject" type="text" class="search_entry_box" <%= "value='#{@sphrs}'" if @sphrs %> /></td></tr>
-				<tr><td>Coverage:</td><td><input id="search_coverage" name="coverage" type="text" class="search_entry_box" <%= "value='#{@cphrs}'" if @cphrs %> /></td></tr>
+        <tr><td>Year (YYYY):</td><td><input id="search_year" name="y" type="text" class="search_entry_box" <%= "value='#{@yphrs}'" if @yphrs %> /></td>
+        <% if SKIN === 'near' %>
+          <td><span class="tooltip advanced_search_field_tooltip">
+            <%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) %>
+            <span class="search_help_tooltip">
+              <b>Search by Year</b><br />[Help text to be completed.]
+            </span>
+          </span></td>
+        <% end %>
+        </tr>
+				<tr><td>Subject:</td><td><input id="search_subject" name="subject" type="text" class="search_entry_box" <%= "value='#{@sphrs}'" if @sphrs %> /></td>
+        <% if SKIN === 'near' %>
+          <td><span class="tooltip advanced_search_field_tooltip">
+            <%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) %>
+            <span class="search_help_tooltip">
+              <b>Search by Subject</b><br />[Help text to be completed.]
+            </span>
+          </span></td>
+        <% end %>
+        </tr>
+        <% if SKIN.upcase == 'NEAR' || SKIN.upcase == 'COLLEX' %>
+           <tr><td>Place of Publication:</td><td><input id="search_coverage" name="coverage" type="text" class="search_entry_box" <%= "value='#{@cphrs}'" if @cphrs %> /></td>
+           <td><span class="tooltip advanced_search_field_tooltip">
+             <%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) %>
+             <span class="search_help_tooltip">
+               <b>Search by Place of Publication</b><br />[Help text to be completed.]
+             </span>
+           </span></td></tr>
+					 <tr><td></td><td></td></tr>
+					 <tr style="margin-top: 1em; border-top-width: 1px; border-top-style: solid; border-top-color: black;"><td></td><td>Fields only applicable to NEAR archives:</td></tr>
+           <tr><td>State of Publication:</td><td><input id="search_publication_state" name="publication_state" type="text" class="search_entry_box" /></td>
+           <td><span class="tooltip advanced_search_field_tooltip">
+             <%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) %>
+             <span class="search_help_tooltip">
+               <b>Search by State of Publication</b><br />[Help text to be completed.]
+             </span>
+           </span></td></tr>
+           <tr><td>City of Publication:</td><td><input id="search_publication_city" name="publication_city" type="text" class="search_entry_box" /></td>
+           <td><span class="tooltip advanced_search_field_tooltip">
+             <%= image_tag("#{SKIN}/help_thumb.gif", {alt: 'help', height: 25, style: "padding-left:5px"}) %>
+             <span class="search_help_tooltip">
+               <b>Search by City of Publication</b><br />[Help text to be completed.]
+             </span>
+           </span></td></tr>
+        <% else %>
+				   <tr><td>Coverage:</td><td><input id="search_coverage" name="coverage" type="text" class="search_entry_box" <%= "value='#{@cphrs}'" if @cphrs %> /></td></tr>
+        <% end %>
         <tr><td colspan="3" style="text-align: right;"><input id="search_submit2" type="submit" value="Search" /></td></tr>
     </table>
 	</form>

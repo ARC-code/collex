@@ -21,8 +21,15 @@ jQuery(document).ready(function($) {
 			fuz_t: 'Title Fuzziness',
 			pages: 'Pages of',
 			subject: 'Subject',
-			coverage: 'Coverage'
 		};
+		if (body.hasClass('federation-near') || body.hasClass('federation-collex')) {
+			types.coverage = 'Place of Publication';
+			types.publication_state = 'State of Publication';
+			types.publication_city = 'City of Publication';
+		}
+		else {
+			types.coverage = 'Coverage';
+		}
 		if (types[key])
 			return types[key];
 		return key;
@@ -94,7 +101,14 @@ jQuery(document).ready(function($) {
 		}
 		searchTypes.push(['Year (YYYY)', 'y']);
 		searchTypes.push(['Subject', 'subject']);
-		searchTypes.push(['Coverage', 'coverage']);
+    if (body.hasClass('federation-near') || body.hasClass('federation-collex')) {
+      searchTypes.push(['Place of Publication', 'coverage']);
+      searchTypes.push(['State of Publication', 'publication_state']);
+      searchTypes.push(['City of Publication', 'publication_city']);
+    }
+    else {
+      searchTypes.push(['Coverage', 'coverage']);
+    }
 		var selectTypeOptions = "";
 		for (var i = 0; i < searchTypes.length; i++)
 			selectTypeOptions += window.pss.createHtmlTag("option", {value: searchTypes[i][1] }, searchTypes[i][0]);

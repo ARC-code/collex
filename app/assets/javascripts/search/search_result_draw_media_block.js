@@ -36,7 +36,7 @@ jQuery(document).ready(function($) {
 	function createImageBlock(index, hit) {
 		var check = "";
 		var isLoggedIn = window.collex.currentUserId && window.collex.currentUserId > 0;
-		if (isLoggedIn)
+		if (isLoggedIn && !window.collex.permalinkMode)
 			check = window.pss.createHtmlTag("input", { 'type': 'checkbox', 'id': "bulk_collect_"+index, 'name': "bulk_collect["+index+"]", 'value': hit.uri });
 		var image = thumbnailImageTag(hit);
 		var icons = "";
@@ -61,13 +61,14 @@ jQuery(document).ready(function($) {
 		var discuss = window.pss.createHtmlTag("button", { 'class': 'discuss' }, "Discuss");
 		var exhibit = isCollected ? window.pss.createHtmlTag("button", { 'class': 'exhibit' }, "Exhibit") : '';
 		var typewright = window.collex.hasTypewright && hit.typewright ? window.pss.createHtmlTag("button", { 'class': 'edit log-in-first-link', 'data-login-prompt': "Please log in to begin editing" }, "Edit") : '';
+		var permalink = window.pss.createHtmlTag("button", { 'class': 'permalink' }, "Permalink");
 		var pages = "";
 		if ( window.collex.hasPageSearch ) {
            if ( hit.has_pages ) {
               pages = window.pss.createHtmlTag("button", { 'class': 'page-search' }, "All Pages");
            }
 		}
-		return window.pss.createHtmlTag("div", { 'class': 'search_result_buttons' }, collect+uncollect+discuss+exhibit+typewright+pages);
+		return window.pss.createHtmlTag("div", { 'class': 'search_result_buttons' }, collect+uncollect+discuss+exhibit+typewright+pages+permalink);
 	}
 
 	function createZoteraTitle(obj) {
@@ -140,7 +141,7 @@ jQuery(document).ready(function($) {
 			return "";
 
 		var klass = "row";
-		if (startHidden) {
+		if (startHidden && !window.collex.permalinkMode) {
 			klass += ' hidden';
 			needShowMoreLink = true;
 		}
@@ -283,6 +284,7 @@ jQuery(document).ready(function($) {
 		html += createResultContentItem('multiple_item', 'Genre:', obj.genre, true);
 		html += createResultContentItem('multiple_item', 'Discipline:', obj.discipline, true);
 		html += createResultContentItem('multiple_item', 'Subject:', obj.subject, true);
+    html += createResultContentItem('multiple_item', $('body').hasClass('federation-near') || $('body').hasClass('federation-collex') ? 'Place of Pub.:' : 'Coverage', obj.coverage, true);
 		html += createResultContentItem('single_item', 'Exhibit&nbsp;type:', obj.exhibit_type, false);
 		html += createResultContentItem('single_item', 'License:', obj.license, false);
 

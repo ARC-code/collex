@@ -7,6 +7,7 @@
 # cap edge_estc
 # cap edge_gla
 # cap edge_near
+# cap edge_rekn
 # cap prod_nines
 # cap prod_18th
 # cap prod_mesa
@@ -15,6 +16,7 @@
 # cap prod_estc
 # cap prod_gla
 # cap prod_near
+# cap prod_rekn
 
 require 'rvm/capistrano'
 require 'bundler/capistrano'
@@ -52,7 +54,8 @@ task :menu do
       '5' => { name: "cap edge_sro", computer: 'edge', skin: 'sro' },
       'e' => { name: "cap edge_estc", computer: 'edge', skin: 'estc' },
       'g' => { name: "cap edge_gla", computer: 'edge', skin: 'gla' },
-      'n' => { name: "cap edge_near", computer: 'edge', skin: 'gla' },
+      'n' => { name: "cap edge_near", computer: 'edge', skin: 'near' },
+      'r' => { name: "cap edge_rekn", computer: 'edge', skin: 'rekn' },
       '6' => { name: "cap prod_nines", computer: 'prod', skin: 'nines' },
       '7' => { name: "cap prod_18th", computer: 'prod', skin: '18th' },
       '8' => { name: "cap prod_mesa", computer: 'prod', skin: 'mesa' },
@@ -60,7 +63,8 @@ task :menu do
       'S' => { name: "cap prod_sro", computer: 'prod', skin: 'sro' },
       'E' => { name: "cap prod_estc", computer: 'prod', skin: 'estc' },
       'G' => { name: "cap prod_gla", computer: 'prod', skin: 'gla' },
-      'N' => { name: "cap prod_near", computer: 'prod', skin: 'near' }
+      'N' => { name: "cap prod_near", computer: 'prod', skin: 'near' },
+      'R' => { name: "cap prod_rekn", computer: 'prod', skin: 'rekn' }
    }
 
    tasks.each { |key, value|
@@ -147,6 +151,11 @@ task :edge_near do
    set_application('edge', 'near')
 end
 
+desc "Run tasks to update edge ReKN environment."
+task :edge_rekn do
+   set_application('edge', 'rekn')
+end
+
 desc "Run tasks to update production NINES environment."
 task :prod_nines do
    set_application('prod', 'nines')
@@ -185,6 +194,11 @@ end
 desc "Run tasks to update production NEAR environment."
 task :prod_near do
    set_application('prod', 'near')
+end
+
+desc "Run tasks to update production ReKN environment."
+task :prod_rekn do
+   set_application('prod', 'rekn')
 end
 
 namespace :passenger do
@@ -241,6 +255,7 @@ after :edge_sro, 'deploy'
 after :edge_estc, 'deploy'
 after :edge_gla, 'deploy'
 after :edge_near, 'deploy'
+after :edge_rekn, 'deploy'
 after :prod_nines, 'deploy'
 after :prod_18th, 'deploy'
 after :prod_mesa, 'deploy'
@@ -249,6 +264,7 @@ after :prod_sro, 'deploy'
 after :prod_estc, 'deploy'
 after :prod_gla, 'deploy'
 after :prod_near, 'deploy'
+after :prod_rekn, 'deploy'
 after :deploy, "deploy:migrate"
 
 after "deploy:stop",    "delayed_job:stop"
@@ -311,6 +327,12 @@ task :edge_near_setup do
 end
 after :edge_near_setup, 'deploy:setup'
 
+desc "Set up the edge ReKN server."
+task :edge_rekn_setup do
+   set_application('edge', 'rekn')
+end
+after :edge_rekn_setup, 'deploy:setup'
+
 desc "Set up the prod nines server."
 task :prod_nines_setup do
    set_application('prod', 'nines')
@@ -358,6 +380,12 @@ task :prod_near_setup do
    set_application('prod', 'near')
 end
 after :prod_near_setup, 'deploy:setup'
+
+desc "Set up the prod ReKN server."
+task :prod_rekn_setup do
+   set_application('prod', 'rekn')
+end
+after :prod_rekn_setup, 'deploy:setup'
 
 desc "Set up the edge server's config."
 task :setup_config do

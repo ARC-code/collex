@@ -40,6 +40,12 @@ jQuery(document).ready(function($) {
 		doEditDocument( params.isLoggedIn, tw_url );
 	});
 
+	body.on("click", ".search_result_buttons .permalink", function (e) {
+		var params = setup(e, this);
+		doShowPermalink(params.uri);
+		return false;
+	});
+
 	body.on("click", ".search-result .uri_link", function (e) {
 		jQuery(this).next().toggle();
 		return false;
@@ -51,4 +57,3 @@ jQuery(document).ready(function($) {
    });
 
 });
-

@@ -31,6 +31,8 @@ class SearchController < ApplicationController
 				render "index", { layout: 'application' }
 			}
 			format.json do
+            puts '~~~~~~!!~~~~~~~'
+            puts params
             if params.has_key? :pages
                begin
                   items_per_page = 30
@@ -97,16 +99,29 @@ class SearchController < ApplicationController
 	   constraints = []
 	   return constraints if query.blank?
 
-	   legal_constraints = [ 'q', 'f', 'o', 'g', 'a', 't', 'aut', 'ed', 'pub', 'r_art', 'r_own', 'fuz_q', 'fuz_t', 'y', 'lang', 'doc_type', 'discipline', 'fuz_q', 'fuz_t', 'subject', 'coverage' ]
+	   legal_constraints = [ 'q', 'f', 'o', 'g', 'a', 't', 'aut', 'ed', 'pub', 'r_art', 'r_own', 'fuz_q', 'fuz_t', 'y', 'lang', 'doc_type', 'discipline', 'fuz_q', 'fuz_t', 'subject', 'coverage', 'publication_country', 'publication_state', 'publication_city', 'uri' ]
 	   @searchable_roles.each { |role|
 		   legal_constraints.push(role[0])
 	   }
+
+     if query.has_key?('publication_state') && query.has_key?('publication_city')
+       coverage = query.has_key?('coverage') ? query['coverage'] + " " : "";
+       coverage = coverage + "\"#{query['publication_state']} #{query['publication_city']}\""
+       query['coverage'] = coverage
+     end
+
+     # prevent users from seeing error when trying to use MARC-style delimiters
+     ['subject', 'coverage'].each do |key|
+       if query.has_key?(key)
+         query[key] = query[key].gsub(/--/, " ")
+       end
+     end
 
 	   found_federation = false
 	   query.each { |key, val|
 		   found_federation = true if key == 'f'
 		   if legal_constraints.include?(key) && val.present?
-			   if key == 'q' || key == 't' || key == 'aut' || key == 'pub' || key == 'ed' || key == 'r_own' || key == 'r_art' || key == 'subject' || key == 'coverage'
+			   if key == 'q' || key == 't' || key == 'aut' || key == 'pub' || key == 'ed' || key == 'r_own' || key == 'r_art' || key == 'subject' || key == 'coverage' || key == 'uri'
 				   val = process_q_param(val)
 			   end
 			   # if we were passed fuzzy constraints, make sure that the corresponding other value is set
@@ -152,26 +167,63 @@ class SearchController < ApplicationController
 	 set_archive_toggle_state(@archives)
 	 @other_federations = []
 	 session[:federations].each { |key,val| @other_federations.push(key) if key != Setup.default_federation() } if session[:federations]
-	 @searchable_roles = [
-		 ["r_art", "Artist"],
-		 ["aut", "Author"],
-		 ["role_BND", "Binder"],
-		 ["role_COL", "Collector"],
-		 ["role_COM", "Compiler"],
-		 ["role_CRE", "Creator"],
-		 ["role_CTG", "Cartographer"],
-		 ["ed", "Editor"],
-		 ["role_ILU", "Illuminator"],
-		 ["role_LTG", "Lithographer"],
-		 ["r_own", "Owner"],
-		 ["pub", "Publisher"],
-		 ["role_POP", "Printer of plates"],
-		 ["role_PRT", "Printer"],
-		 ["role_RPS", "Repository"],
-		 ["role_SCR", "Scribe"],
-		 ["role_TRL", "Translator"],
-		 ["role_WDE", "Wood Engraver"]
-	 ]
+	 @searchable_roles = []
+   if SKIN == 'near'
+     @searchable_roles = [
+       ["role_ARR", "Arranger"],
+       ["role_ART", "Artist"],
+       ["role_ASN", "Associated name"],
+       ["role_AUT", "Author"],
+       ["role_BND", "Binder"],
+       ["role_BDD", "Binding designer"],
+       ["role_BSL", "Bookseller"],
+       ["role_CTG", "Cartographer"],
+       ["role_COM", "Compiler"],
+       ["role_CPL", "Complainant"],
+       ["role_CPH", "Copyright holder"],
+       ["role_CRT", "Court reporter"],
+       ["role_DTE", "Dedicatee"],
+       ["role_DFD", "Defendant"],
+       ["role_EDT", "Editor"],
+       ["role_EGR", "Engraver"],
+       ["role_ILL", "Illustrator"],
+       ["role_LSO", "Licensor"],
+       ["role_LTG", "Lithographer"],
+       ["role_PPM", "Papermaker"],
+       ["role_PTF", "Plaintiff"],
+       ["role_POP", "Printer of plates"],
+       ["role_PRT", "Printer"],
+       ["role_PBL", "Publisher"],
+       ["role_RPT", "Reporter"],
+       ["role_SCL", "Sculptor"],
+       ["role_STR", "Stereotyper"],
+       ["role_TRC", "Transcriber"],
+       ["role_TRL", "Translator"],
+       ["role_TYG", "Typographer"]
+     ]
+   else
+     @searchable_roles = [
+  		 ["role_ART", "Artist"],
+  		 ["aut", "Author"],
+  		 ["role_BND", "Binder"],
+  		 ["role_COL", "Collector"],
+  		 ["role_COM", "Compiler"],
+  		 ["role_CRE", "Creator"],
+  		 ["role_CTG", "Cartographer"],
+  		 ["ed", "Editor"],
+  		 ["role_ILU", "Illuminator"],
+  		 ["role_LTG", "Lithographer"],
+  		 ["r_own", "Owner"],
+  		 ["pub", "Publisher"],
+  		 ["role_POP", "Printer of plates"],
+  		 ["role_PRT", "Printer"],
+  		 ["role_RPS", "Repository"],
+  		 ["role_SCR", "Scribe"],
+  		 ["role_TRL", "Translator"],
+  		 ["role_WDE", "Wood Engraver"]
+  	 ]
+   end
+   @permalink_mode = params.has_key? 'perm'
 	 return true
    end
 
