@@ -118,7 +118,7 @@ class CachedResource < ActiveRecord::Base
 	end
 	
 	def self.get_most_recent_tags(num)
-		sql_recent = "SELECT DISTINCT tags.name, count(tag_id) as freq FROM tagassigns join tags on tags.id = tagassigns.tag_id GROUP BY tag_id ORDER BY MAX(updated_at) DESC limit #{num}"
+		sql_recent = "SELECT DISTINCT tags.name, count(tag_id) as freq, MAX(tagassigns.updated_at) as time FROM tagassigns join tags on tags.id = tagassigns.tag_id GROUP BY tag_id ORDER BY time DESC limit #{num}"
 		cloud = find_by_sql([ sql_recent ]) 
 		# convert active record objects to [name,freq] pairs
 		if cloud != nil
