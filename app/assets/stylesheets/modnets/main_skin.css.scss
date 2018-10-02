@@ -302,7 +302,7 @@ a.my_collex_link {
 }
 
 div.edit_bar .yui-button.yui-menu-button {
-   background: transparent url('http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png') repeat-x scroll 0 0;
+   background: transparent url('https://yui-s.yahooapis.com/2.9.0/build/assets/skins/sam/sprite.png') repeat-x scroll 0 0;
 }
 
  .button_tab_selected.yui-button button {
@@ -328,7 +328,7 @@ div.edit_bar .yui-button.yui-menu-button {
    color: white;
 }
 	// TODO-PER: This is needed to correct for a specificity problem in the above css
-	 .yui-toolbar-container .yui-push-button, .yui-toolbar-container .yui-color-button, .yui-toolbar-container .yui-menu-button{background:url(http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/sprite.png) repeat-x 0 0;position:relative;display:block;height:22px;width:30px;_font-size:0;margin:0;border-color:#808080;color:#f2f2f2;border-style:solid;border-width:1px 0;zoom:1;}
+	 .yui-toolbar-container .yui-push-button, .yui-toolbar-container .yui-color-button, .yui-toolbar-container .yui-menu-button{background:url(https://yui-s.yahooapis.com/2.8.2r1/build/assets/skins/sam/sprite.png) repeat-x 0 0;position:relative;display:block;height:22px;width:30px;_font-size:0;margin:0;border-color:#808080;color:#f2f2f2;border-style:solid;border-width:1px 0;zoom:1;}
 	 .yui-toolbar-container .yui-push-button a, .yui-toolbar-container .yui-color-button a, .yui-toolbar-container .yui-menu-button a{padding-left:35px;height:20px;text-decoration:none;font-size:0;line-height:2;display:block;color:#000;overflow:hidden;white-space:nowrap;}
 	 .yui-toolbar-container .yui-toolbar-spinbutton a, .yui-toolbar-container .yui-toolbar-select a{font-size:12px;}
 	 .yui-toolbar-container .yui-push-button .first-child, .yui-toolbar-container .yui-color-button .first-child, .yui-toolbar-container .yui-menu-button .first-child{border-color:#808080;border-style:solid;border-width:0 1px;margin:0 -1px;display:block;position:relative;}
@@ -337,12 +337,12 @@ div.edit_bar .yui-button.yui-menu-button {
 	 .yui-toolbar-container .yui-push-button-disabled, .yui-toolbar-container .yui-color-button-disabled, .yui-toolbar-container .yui-menu-button-disabled{border-color:#ccc;}
 	 .yui-toolbar-container .yui-button .first-child{*left:0;}
 	 .yui-toolbar-container .yui-toolbar-fontname{width:135px;} .yui-toolbar-container .yui-toolbar-heading{width:92px;}
-	 .yui-toolbar-container .yui-button-hover{background:url(http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/sprite.png) repeat-x 0 -1300px;border-color:#808080;}
-	 .yui-toolbar-container .yui-button-selected{background:url(http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/sprite.png) repeat-x 0 -1700px;border-color:#808080;}
+	 .yui-toolbar-container .yui-button-hover{background:url(https://yui-s.yahooapis.com/2.8.2r1/build/assets/skins/sam/sprite.png) repeat-x 0 -1300px;border-color:#808080;}
+	 .yui-toolbar-container .yui-button-selected{background:url(https://yui-s.yahooapis.com/2.8.2r1/build/assets/skins/sam/sprite.png) repeat-x 0 -1700px;border-color:#808080;}
 	 .yui-toolbar-container .yui-toolbar-nogrouplabels h3{display:none;}
 	 .yui-toolbar-container .yui-toolbar-nogrouplabels .yui-toolbar-group{margin-top:.75em;}
-	 .yui-toolbar-container .yui-push-button span.yui-toolbar-icon, .yui-toolbar-container .yui-color-button span.yui-toolbar-icon, .yui-toolbar-container .yui-menu-button span.yui-toolbar-icon{display:block;position:absolute;top:2px;height:18px;width:18px;overflow:hidden;background:url(http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/editor-sprite.gif) no-repeat 30px 30px;}
-	 .yui-toolbar-container .yui-button-selected span.yui-toolbar-icon, .yui-toolbar-container .yui-button-hover span.yui-toolbar-icon{background-image:url(http://yui.yahooapis.com/2.8.2r1/build/assets/skins/sam/editor-sprite-active.gif);}
+	 .yui-toolbar-container .yui-push-button span.yui-toolbar-icon, .yui-toolbar-container .yui-color-button span.yui-toolbar-icon, .yui-toolbar-container .yui-menu-button span.yui-toolbar-icon{display:block;position:absolute;top:2px;height:18px;width:18px;overflow:hidden;background:url(https://yui-s.yahooapis.com/2.8.2r1/build/assets/skins/sam/editor-sprite.gif) no-repeat 30px 30px;}
+	 .yui-toolbar-container .yui-button-selected span.yui-toolbar-icon, .yui-toolbar-container .yui-button-hover span.yui-toolbar-icon{background-image:url(https://yui-s.yahooapis.com/2.8.2r1/build/assets/skins/sam/editor-sprite-active.gif);}
 	 .yui-toolbar-container .visible .yuimenuitemlabel{cursor:pointer;color:#000;*position:relative;}
 	 .yui-toolbar-container .yui-button-menu{background-color:#fff;}
 	 .yui-toolbar-container .yui-button-menu .yui-menu-body-scrolled{position:relative;}

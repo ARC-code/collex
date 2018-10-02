@@ -25,7 +25,7 @@ module ApplicationHelper
 	#		yui_list += '&amp;' if fnames[:yui][0] != f
 	#		yui_list += "#{yui_path}#{f}.css"
 	#	}
-	#	html = "<link rel='stylesheet' type='text/css' href='http://yui.yahooapis.com/combo?#{yui_list}' />\n"
+	#	html = "<link rel='stylesheet' type='text/css' href='https://yui-s.yahooapis.com/combo?#{yui_list}' />\n"
 	#	if debug
 	#		html += stylesheet_link_tag(fnames[:local], :media => "all")
 	#		return raw(html)
@@ -46,14 +46,14 @@ module ApplicationHelper
 	#	if debug
 	#		html = javascript_include_tag(fnames[:prototype]) + "\n"
 	#		if yui_list.length > 0
-	#			html += javascript_include_tag("http://yui.yahooapis.com/combo?#{raw(yui_list)}") + "\n"
+	#			html += javascript_include_tag("https://yui-s.yahooapis.com/combo?#{raw(yui_list)}") + "\n"
 	#		end
 	#		html += javascript_include_tag(fnames[:local]) + "\n"
 	#		return raw(html)
 	#	else
 	#		html = javascript_include_tag("prototype-min") + "\n"
 	#		if yui_list.length > 0
-	#			html += javascript_include_tag("http://yui.yahooapis.com/combo?#{raw(yui_list)}") + "\n"
+	#			html += javascript_include_tag("https://yui-s.yahooapis.com/combo?#{raw(yui_list)}") + "\n"
 	#		end
 	#		html += javascript_include_tag("#{page.to_s()}-min") + "\n"
 	#		return raw(html)
