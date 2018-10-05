@@ -27,7 +27,7 @@ class DiscussionTopic < ActiveRecord::Base
     return topics_and_date
   end
   
-  def self.get_last_updated_date()
+  def get_last_updated_date()
     threads = self.discussion_threads
     newest_date = nil
     for thread in threads
