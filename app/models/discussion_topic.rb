@@ -34,9 +34,7 @@ class DiscussionTopic < ActiveRecord::Base
       comments = thread.discussion_comments
       if !comments.blank?
         last_comment_time = comments[comments.length-1].updated_at
-        if newest_date == nil
-          newest_date = last_comment_time
-        elsif newest_date < last_comment_time
+        if !newest_date || newest_date < last_comment_time
           newest_date = last_comment_time
         end
       end
