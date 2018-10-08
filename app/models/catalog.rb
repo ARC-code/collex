@@ -692,7 +692,8 @@ class Catalog
       end
    end
 
-   require 'net/http'
+   #require 'net/http'
+   require 'net/https'
 
    def call_solr(url, verb, params = [])
       params.push("test_index=true") if @use_test_index
@@ -702,7 +703,8 @@ class Catalog
       url = URI.parse(Setup.solr_url())
       Catalog.log_catalog(verb.to_s().upcase(), "#{url}#{request} ARGS: #{args}")
       begin
-         res = Net::HTTP.start(url.host, url.port) do |http|
+         res = Net::HTTP.start(url.host, 443) do |http|
+            http.use_ssl = true
             if verb == :get
                args = '?' + args if args.length > 0
                http.get("#{request}#{args}")
