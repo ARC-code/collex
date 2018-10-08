@@ -704,7 +704,7 @@ class Catalog
       Catalog.log_catalog(verb.to_s().upcase(), "#{url}#{request} ARGS: #{args}")
       begin
          res = Net::HTTP.start(url.host, 443) do |http|
-            http.use_ssl = true
+            #http.use_ssl = true
             if verb == :get
                args = '?' + args if args.length > 0
                http.get("#{request}#{args}")
