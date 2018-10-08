@@ -703,8 +703,7 @@ class Catalog
       url = URI.parse(Setup.solr_url())
       Catalog.log_catalog(verb.to_s().upcase(), "#{url}#{request} ARGS: #{args}")
       begin
-         res = Net::HTTP.start(url.host, 443) do |http|
-            #http.use_ssl = true
+         res = Net::HTTP.start(url.host, url.port, :use_ssl => true) do |http|
             if verb == :get
                args = '?' + args if args.length > 0
                http.get("#{request}#{args}")
