@@ -285,9 +285,9 @@ jQuery(document).ready(function($) {
 		html += createResultContentItem('multiple_item', 'Discipline:', obj.discipline, true);
 		html += createResultContentItem('multiple_item', 'Subject:', obj.subject, true);
 
-        if (obj.coverage.constructor === Array) {
+        if (typeof obj.coverage != 'undefined' && obj.coverage.constructor === Array) {
             html += createResultContentItem('multiple_item', $('body').hasClass('federation-near') || $('body').hasClass('federation-collex') ? 'Place of Pub.:' : 'Coverage', obj.coverage, true);
-        } else {
+        } else if (obj.coverage != 'undefined') {
             html += createResultContentItem('multiple_item', $('body').hasClass('federation-near') || $('body').hasClass('federation-collex') ? 'Place of Pub.:' : 'Coverage', [obj.coverage], true);
         }
 
