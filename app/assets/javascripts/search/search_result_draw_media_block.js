@@ -284,8 +284,14 @@ jQuery(document).ready(function($) {
 		html += createResultContentItem('multiple_item', 'Genre:', obj.genre, true);
 		html += createResultContentItem('multiple_item', 'Discipline:', obj.discipline, true);
 		html += createResultContentItem('multiple_item', 'Subject:', obj.subject, true);
-    html += createResultContentItem('multiple_item', $('body').hasClass('federation-near') || $('body').hasClass('federation-collex') ? 'Place of Pub.:' : 'Coverage', obj.coverage, true);
-		html += createResultContentItem('single_item', 'Exhibit&nbsp;type:', obj.exhibit_type, false);
+
+        if (obj.coverage.constructor === Array) {
+            html += createResultContentItem('multiple_item', $('body').hasClass('federation-near') || $('body').hasClass('federation-collex') ? 'Place of Pub.:' : 'Coverage', obj.coverage, true);
+        } else {
+            html += createResultContentItem('multiple_item', $('body').hasClass('federation-near') || $('body').hasClass('federation-collex') ? 'Place of Pub.:' : 'Coverage', [obj.coverage], true);
+        }
+
+        html += createResultContentItem('single_item', 'Exhibit&nbsp;type:', obj.exhibit_type, false);
 		html += createResultContentItem('single_item', 'License:', obj.license, false);
 
 		html += createResultContentItem('multiple_item', 'Editor:', obj.role_EDT, true);
