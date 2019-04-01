@@ -1,0 +1,54 @@
+/* ------------------------------------------------------------------------
+//     Copyright 2009 Applied Research in Patacriticism and the University of Virginia
+//
+//     Licensed under the Apache License, Version 2.0 (the "License");
+//     you may not use this file except in compliance with the License.
+//     You may obtain a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//     Unless required by applicable law or agreed to in writing, software
+//     distributed under the License is distributed on an "AS IS" BASIS,
+//     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//     See the License for the specific language governing permissions and
+//     limitations under the License.
+// ---------------------------------------------------------------------------- */
+
+/* Set default font varaible */
+$font-stack:    "Times New Roman", Times, serif ;
+/* Main website colors */
+$dark-sepia: #685A52;
+$light-sepia: #F7F4F2;
+$dark-blue: #5791AA;
+$light-blue: #BDCCD4;
+
+body.federation-earlyprint.pg-admin {
+	#subnav_container{
+		padding-bottom:0 !important;
+
+		#admin_menu{
+			background-color: $light-sepia;
+			border-top: 2px solid $dark-sepia;
+			margin: .25em -2em 0 -2em;
+			padding: .25em 3em;
+    		border-radius: 0;
+
+    		li{
+    		    margin-right: 1em;
+
+    		    .admin_menu_current {
+    		    	background-color:$light-sepia;
+    		    }
+
+    		    a {
+    				border: none;
+    				color: #999999;
+    			}
+    		}
+    		
+		}
+	}
+
+	.user_roles th,  .exhibit_category th, .tw_overview th { background-color: $dark-blue; }
+}
+

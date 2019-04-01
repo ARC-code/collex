@@ -1,0 +1,225 @@
+/* ------------------------------------------------------------------------
+//     Copyright 2009 Applied Research in Patacriticism and the University of Virginia
+//
+//     Licensed under the Apache License, Version 2.0 (the "License");
+//     you may not use this file except in compliance with the License.
+//     You may obtain a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//     Unless required by applicable law or agreed to in writing, software
+//     distributed under the License is distributed on an "AS IS" BASIS,
+//     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//     See the License for the specific language governing permissions and
+//     limitations under the License.
+// ---------------------------------------------------------------------------- */
+
+$font-stack:    "Times New Roman", Times, serif ;
+
+$dark-sepia: #685A52;
+$light-sepia: #F7F4F2;
+$dark-blue: #5791AA;
+$light-blue: #BDCCD4;
+
+body.federation-earlyprint.pg-lvl2 {
+  #header_container {
+      height: 75px;
+        #header_right {
+          margin:0;
+        }  
+      }
+
+  #nav_container {
+    /* reset nav bar */
+    position: static;
+      a {
+          color:white;
+      }
+      a:visited {
+          color:white;
+      }
+      a:hover {
+          color:$light-blue;
+      }
+
+  }
+
+  .my_collex_link, .my_collex_link_current, .my_collex_link:visited, {
+    position:inherit;
+    padding-left:1em;
+    color:white;
+  }
+
+  #subnav_container {
+    position: static;
+    display: block;
+    padding: 1em 2em;
+    clear: both;
+    background-color: white;
+    font-family: $font-stack !important;
+    border-bottom:2px solid $dark-sepia;
+
+    .tab_link_current {
+        color: white;
+    }
+    .tab_link_current:active, .tab_link_current:visited, .tab_link_current:hover {
+        color: white !important;
+    }
+    
+  }
+
+  .right_column {
+    width: 29%;
+    float: right;
+    border:1px solid $dark-blue;
+    padding: 0px 0px 10px 0px;
+    overflow: hidden;
+    background-color:white;
+
+    .right_column_header, .shared_header {
+      width: 100%; 
+      padding: .5em;
+      margin-right:10px;
+      font-size: 1.25em;
+      font-weight: 500;
+      background-color: $dark-blue;
+      color: white;
+    }
+
+    .limit_to_selected{
+      width: 100%; 
+      padding: .15em;
+      margin-right:10px;
+      font-size: 1.15em;
+      font-weight: 500;
+      background-color: $light-sepia;
+      color: $dark-sepia;
+    }
+  }
+  
+  .group_details_right, .group_details_center {
+    padding: 1em;
+    margin:1em;
+    .group_details_label {
+      font-size: 1.25em;
+      font-weight: 500;
+      color: $dark-blue;
+    }
+  }
+
+  .group_header header_right{
+      font-size: 1.25em;
+      font-weight: 500;
+      color: $dark-blue;
+  }
+
+  /* Search buttons */
+  .page_header {
+    font-size:1em;
+
+    .new_search {
+      font-size:1em;
+      width:auto;
+      height: auto; 
+      float: right;
+      margin-left: 1em;
+    }
+
+    .new_search:active {
+        font-size:1em;
+        width:auto;
+        height: auto; 
+        transform: translateY(1px);
+        filter: saturate(150%);
+      }
+
+    .new_search:hover{
+        font-size:1em;
+        width:auto;
+        height: auto; 
+        color: $dark-blue;
+        border-color: currentColor;
+        background-color: white;
+      }
+
+    .new_search:focus{
+        font-size:1em;
+        width:auto;
+        height: auto; 
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(87, 145, 170, 0.5),
+        0 0 0 1.5px rgba(87, 145, 170, 0.5);
+      }
+  }
+  
+  .search_results_pages {
+    .pagination {
+      word-spacing: 0.15em;
+      button{
+        padding:.1em !important;
+      }
+    }
+    .search_result_image {
+      margin:0;
+    }
+
+  }
+
+  .search_result_buttons {
+    button {
+        width:90px !important;
+      }
+
+    button:active {
+        font-size:1em;
+        width:auto;
+        height: auto; 
+        transform: translateY(1px);
+        filter: saturate(150%);
+      }
+
+    button:hover{
+        font-size:1em;
+        width:auto;
+        height: auto; 
+        color: $dark-blue;
+        border-color: currentColor !important;
+        background-color: white;
+      }
+
+    button:focus{
+        font-size:1em;
+        width:auto;
+        height: auto; 
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(87, 145, 170, 0.5),
+          0 0 0 1.5px rgba(87, 145, 170, 0.5);
+      }      
+  }
+
+  .search_result_header a{
+    font-weight: 500;
+    color:$dark-blue;
+    text-decoration:none;
+  }
+  
+  /* General error styles */
+  .search_error_message{
+    width:80%;  
+  }
+
+  .inner_content_container{
+    padding:1em 2em;
+  }
+
+  #tag_explanation, #tag_cloud_div {
+    margin: auto;
+    width: 50%;
+    padding: 1.5em;
+    text-align: center;
+    width: 60%;
+    background-color:white;
+  }
+
+}
+

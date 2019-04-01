@@ -1,0 +1,331 @@
+/* ------------------------------------------------------------------------
+//     Copyright 2009 Applied Research in Patacriticism and the University of Virginia
+//
+//     Licensed under the Apache License, Version 2.0 (the "License");
+//     you may not use this file except in compliance with the License.
+//     You may obtain a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//     Unless required by applicable law or agreed to in writing, software
+//     distributed under the License is distributed on an "AS IS" BASIS,
+//     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//     See the License for the specific language governing permissions and
+//     limitations under the License.
+// ---------------------------------------------------------------------------- */
+
+/* Set default font varaible */
+$font-stack:    "Times New Roman", Times, serif ;
+/* Main website colors */
+$dark-sepia: #685A52;
+$light-sepia: #F7F4F2;
+$dark-blue: #5791AA;
+$light-blue: #BDCCD4;
+
+/* Button styles, styled after Bootstrap buttons */
+@mixin button-bg($bg) {
+      display: inline-block;
+      text-align: center;
+      text-decoration: none;
+      margin: 2px 0;
+      border: solid 1px transparent;
+      border-radius: 4px;
+      padding: 0.5em 1em;
+      color: #FFFFFF;
+      background-color: $bg;
+  
+}
+/* Reset all button styles */
+button {
+      padding: 0;
+      border: none;
+      font: inherit;
+      color: inherit;
+      background-color: transparent;
+      /* show a hand cursor on hover; some argue that we
+      should keep the default arrow cursor for buttons */
+      cursor: pointer;
+    }
+
+/* Add new general button styles */
+button {@include button-bg($dark-blue);}
+
+button:active {
+      transform: translateY(1px);
+      filter: saturate(150%);
+    }
+
+button:hover {
+      color: $dark-blue;
+      border-color: currentColor;
+      background-color: white;
+    }
+
+button::-moz-focus-inner {
+      border: none;
+    }
+
+button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(87, 145, 170, 0.5),
+        0 0 0 1.5px rgba(87, 145, 170, 0.5);
+    }
+
+/* General link styles */
+.nav_link {
+  background:none;
+  border:none;
+}
+
+.modify_link, .nav_link, body.federation-earlyprint .nav_link:link, body.federation-earlyprint .nav_link:visited {
+  color: $dark-blue;
+}
+
+/* Typography */
+h1 {
+  font-size:1.25;
+  font-weight: 500;
+  color:$dark-sepia;
+}
+
+h2 {
+  font-size:1.15;
+  font-weight: 500;
+  color:$dark-blue;
+}
+
+h3,h4,h5 {
+  font-weight: 500;
+  color:$dark-sepia;
+}
+
+/* Body styles */
+body.federation-earlyprint {
+  font-family: $font-stack;
+  margin:0;
+  padding:0;
+  text-align:left;
+
+  /* Style header, add logo image */
+  #header_container {
+      height: 75px;
+      background:image-url('/assets/earlyprint/logo.svg') top left no-repeat;
+      border-bottom: 3px solid $dark-sepia;
+      border-top: 3px solid $dark-sepia;
+      background-position: 20px 0;
+      background-color:white;
+  }
+/* Style header, add banner image */
+  #header_right {
+      float: right;
+      width: 60%;
+      height: 75px;
+      background: url(/assets/earlyprint/banner.png);
+      background-size: cover;
+      background-position: center;
+
+      a.nav_link {
+        display:block;
+        float: right;
+        margin: 1em;
+        padding:1em;
+        color: white !important;
+      }  
+  } 
+
+/* Set styles for main container */
+  #main_container {
+    background-color: $dark-sepia;
+    margin: 0;
+    padding:0;
+
+      #nav_container {
+    /* reset nav bar */
+    position: static;
+      a {
+          color:white;
+      }
+      a:visited {
+          color:white;
+      }
+      a:hover {
+          color:$light-blue;
+      }
+
+  }
+
+    .my_collex_link {
+      position:inherit;
+      padding-left:1em;
+      color:white;
+      width: 150px;
+    }
+
+    #subnav_container {
+      position: static;
+      display: block;
+      padding: 1em 2em;
+      clear: both;
+      background-color: white;
+      font-family: $font-stack !important;
+      border-bottom:2px solid $dark-sepia;
+
+      .tab_link_current {
+          color: white;
+      }
+      .tab_link_current:active, .tab_link_current:visited, .tab_link_current:hover {
+          color: white !important;
+      }
+      
+    }
+
+    /* Restyle basic yui buttons to match new button styles*/    
+    .yui-button, .yui-push-button {
+         all: unset;
+    }
+
+    .yui-button {
+      display:inline-block;
+      margin:0 .5em;
+      
+      .first-child {
+        display:inline-block;
+        border:none;
+        margin:0;
+        padding:0;
+
+        a, button {
+          @include button-bg($dark-blue);
+          display:inline-block;
+          color:white;
+          line-height: normal;
+          min-height: .75em;
+          font-size:1em;
+        }
+        a:active, button:active {
+        transform: translateY(1px);
+        filter: saturate(150%);
+        }
+
+        a:hover, button:hover {
+              color: $dark-blue;
+              border-color: currentColor;
+              background-color: white;
+            }
+
+        a:focus, button:focus {
+              outline: none;
+              box-shadow: 0 0 0 3px rgba(255, 105, 180, 0.5),
+                0 0 0 1.5px rgba(255, 105, 180, 0.5);
+            }
+      }
+    }  
+
+  } 
+
+  /*breadcrumbs?*/
+  #content_container{
+    background-color:white;
+
+  }
+
+/* Search on home page */
+  #search_container{
+    background-color:$light-sepia;
+  }
+
+/* On home page */  
+  #popular_container{
+    border-top:2px solid $dark-sepia;
+    border-bottom:2px solid $dark-sepia;
+    table{
+
+      td {
+
+        font-color: #666;
+        
+        .popular_title{
+          color:$dark-sepia;
+          font-weight:600;
+        }
+      }
+    }
+  }
+
+/* Carousel on home page */
+  .carousel_background {
+    background-color:$light-sepia;
+    border-top:2px solid $dark-sepia;
+    border-bottom:2px solid $dark-sepia;
+    margin:0;padding:0;
+    table {
+      background-color:white;
+    }
+  }
+
+  /* Style carousel buttons */
+  #carousel_left {
+    background:transparent image-url('earlyprint/carousel_left_arrow.png') no-repeat scroll center center;
+  }
+  #carousel_right {
+    background:transparent image-url('earlyprint/carousel_right_arrow.png') no-repeat scroll center center;
+  }
+
+  #carousel_left.yui-carousel-first-button-disabled {
+    background:transparent image-url('earlyprint/carousel_left_off.png') no-repeat scroll center center;
+  }
+
+  #carousel_right.yui-carousel-button-disabled {
+    background:transparent image-url('earlyprint/carousel_right_off.png') no-repeat scroll center center;
+  }
+  #carousel_container .yui-carousel-nav {visability:hidden;}
+
+.inner_content_container {
+  font-family: $font-stack;  
+}
+
+/* Footer styles*/  
+  #footer_container {
+      font-family: $font-stack;
+      background:$dark-sepia;
+      margin:0;
+      padding:1.5em ;
+      overflow: auto;
+      color: white;
+    }
+
+  .breadcrumbs {
+      margin: 0;
+      padding: 1em;
+      background-color: $light-sepia;
+      font-family: $font-stack;
+      font-size: .9em;
+  }
+}
+
+
+/* styles for javascript dialogs */
+.yui-skin-sam{
+  .yui-module {
+    .hd {
+      background-image:none;
+      border-bottom:2px solid $dark-sepia;
+      color: $dark-blue;
+      font-weight: 500;
+    }
+  }
+  .yui-panel{
+    .bd, .ft {
+      background-color: white;
+      border-bottom: 2px solid $dark-sepia;
+    }
+  }
+
+  /* styles for javascript login dialogs */
+  .login_div {
+      background-color:white;
+      background-image: url('logo-small.svg');
+      background-repeat: no-repeat;
+      border: 4px solid $dark-sepia;
+  }
+}
