@@ -114,8 +114,8 @@ module DiscussionThreadsHelper
   end
 
   def comment_time_format_relative(tim)
-    logging.info 'tim set to:'
-    logging.info tim
+    logger.info 'tim set to:'
+    logger.info tim
     return "NONE" if tim == nil
 		if tim > 28.days.ago
 	    return time_ago_in_words(tim) + " ago"
