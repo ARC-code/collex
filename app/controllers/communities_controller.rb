@@ -22,6 +22,7 @@ class CommunitiesController < ApplicationController
 		session[:community_view_by] ||= "All"
 		begin
 			@results = get_results()
+			logger.info @results
 		rescue Catalog::Error => e
 			flash[:error] = e.to_s
 			@message = e.to_s
