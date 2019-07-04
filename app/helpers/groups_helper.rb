@@ -16,9 +16,9 @@
 
 module GroupsHelper
 	def get_group_default_url(url)
-		path = ['modnets', 'near', 'rekn'].include?(SKIN) ? "#{SKIN}/lg_site_image.gif" : "#{SKIN}/glossy_swirly.jpg"
-    return image_path(path) if url == nil || url.length == 0
-    return url
+		path = ['modnets', 'near'].include?(SKIN) ? "#{SKIN}/lg_site_image.gif" : "#{SKIN}/glossy_swirly.jpg"
+    		return image_path(path) if url == nil || url.length == 0
+    		return url
 	end
 	def get_group_image_url(group)
 		return group.group_type == 'classroom' ? image_path("#{SKIN}/classroom_icon.sm.jpg") : get_group_default_url(get_url_for_internal_image(Image.find_by_id(group.image_id)))
