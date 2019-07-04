@@ -41,7 +41,7 @@ class Catalog
    end
 
    def self.log_catalog(verb, str)
-      open("#{Rails.root}/log/catalog_activity.log", 'a') { |f|
+      open("/logs/catalog_activity.log", 'a') { |f|
          f.puts "#{Time.now} #{verb}: #{str}"
       }
    end

@@ -65,5 +65,8 @@ module Collex
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.logger = Logger.new('/logs/development.log')
+    config.log_level = :error
   end
 end

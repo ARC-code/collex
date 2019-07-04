@@ -109,16 +109,22 @@ module DiscussionThreadsHelper
   end
   
   def comment_time_format(tim)
-	  return "NONE" if tim == nil
-    return tim.getlocal().strftime("%b %d, %Y %I:%M%p")
+	  if tim.nil?
+      return "NONE"
+    else
+      return tim.getlocal().strftime("%b %d, %Y %I:%M%p")
+    end
   end
 
   def comment_time_format_relative(tim)
-    return "NONE" if tim == nil
-		if tim > 28.days.ago
-	    return time_ago_in_words(tim) + " ago"
-		else
-			return comment_time_format(tim)
+    if tim.nil?
+      return "NONE"
+    else
+      if tim > 28.days.ago
+        return time_ago_in_words(tim) + " ago"
+      else
+        return comment_time_format(tim)
+      end
 		end
   end
 
