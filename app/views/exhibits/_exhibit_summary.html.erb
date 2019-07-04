@@ -30,7 +30,7 @@
 	<% if exhibit.group_id -%>
 		<br />in <%= link_to group.name, { :controller => 'groups', :action => 'show', :id => exhibit.group_id }, :class => 'nav_link' %>
 	<% end -%>
-	<br />Last Modified: 
+	<br />Last Modified: <%= comment_time_format_relative(last_modified) %>
 	<% if text.length > 0 %>
 		<div class="snippet"><%= text %></div>
 	<% end -%>
