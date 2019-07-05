@@ -205,25 +205,30 @@ class SearchUserContent < ActiveRecord::Base
 	end
 
 	def reindex_all()
+		logger.info "starting reindex of all user content..."
 		start_time = Time.now
 		@solr = Catalog.factory_create_user()
 		@solr.start_reindex()
 
+		logger.info "reindexing exhibits..."
 		exhibits = Exhibit.all
 		exhibits.each {|exhibit|
 			reindex_exhibit(exhibit)
 		}
 
+		logger.info "reindexing groups..."
 		groups = Group.all
 		groups.each {|group|
 			reindex_group(group)
 		}
 
+		logger.info "reindexing clusters..."
 		clusters = Cluster.all
 		clusters.each {|cluster|
 			reindex_cluster(cluster)
 		}
 
+		logger.info "reindexing discussion threads..."
 		threads = DiscussionThread.all
 		threads.each {|thread|
 			reindex_thread(thread)
