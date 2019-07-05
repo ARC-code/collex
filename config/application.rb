@@ -67,6 +67,6 @@ module Collex
     config.assets.version = '1.0'
 
     config.logger = Logger.new('/logs/development.log')
-    config.log_level = :error
+    config.log_level = :debug
   end
 end
