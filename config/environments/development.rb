@@ -49,4 +49,7 @@ Collex::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.logger = Logger.new('/logs/development.log')
+  config.log_level = :debug
 end
