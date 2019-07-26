@@ -68,7 +68,7 @@ class Setup < ActiveRecord::Base
 
 	def self.exception_notifier()
 		recipients = globals()['exception_recipients'] ? globals()['exception_recipients'].split(',') : []
-		return { prefix: globals()['subject_prefix'], sections: %w{request environment backtrace}, recipients: recipients, sender: "#{globals()['sender_name']} <#{globals()['return_email']}>" }
+		return { prefix: globals()['subject_prefix'], sections: ['request', 'environment', 'backtrace'], recipients: recipients, sender: "#{globals()['sender_name']} <#{globals()['return_email']}>" }
 	end
 
 	def self.site_name()
@@ -146,7 +146,7 @@ class Setup < ActiveRecord::Base
 			n.default_options[:email_prefix] = except[:prefix]
 			n.default_options[:exception_recipients] = except[:recipients]
 			n.default_options[:sender_address] = except[:sender]
-			n.default_options[:sections] = %w{request environment backtrace}
+			n.default_options[:sections] = except[:sections]
 			puts "$$ Exceptions are mailed to #{except[:recipients].to_s}."
 		else
 			puts "$$ Exception handler not set in development mode."
