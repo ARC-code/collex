@@ -24,6 +24,7 @@ class DiscussionThread < ActiveRecord::Base
 
 	def handle_solr
 		SearchUserContent.delay.index('thread', self.id)
+    true
 	end
 
   def get_title
