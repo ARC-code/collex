@@ -20,11 +20,10 @@ class DiscussionThread < ActiveRecord::Base
 	belongs_to :cluster
   has_many :discussion_comments, :order => :position
 #	has_and_belongs_to_many :users
-	after_save :handle_solr
+	#after_save :handle_solr
 
 	def handle_solr
 		SearchUserContent.delay.index('thread', self.id)
-    return true
 	end
 
   def get_title
