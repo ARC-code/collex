@@ -45,6 +45,9 @@ gem 'will_paginate'
 gem 'rvm-capistrano', '1.5.6'
 gem 'capistrano', '2.15.5'
 
+# for running rails server w/ ssl
+gem 'puma', '2.15.3'
+
 #gem 'bullet', :group => "development" # this is for debugging. It shows inefficiencies. It should not appear in the production code.
 
 # Bundle the extra gems:
