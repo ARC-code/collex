@@ -42,21 +42,24 @@ Private: Only group members may read and respond to private discussions.</span><
 		</li>
 	<% end #if can post -%>
 	<% for thread in threads -%>
-		<li>
-		<% comment_info = get_comment_header_info(thread.discussion_comments[0]) -%>
-		<div class="thumbnail_item">
-			<div class="left_thumbnail">
-		<% if comment_info[:thumbnail] == nil -%>
-				<% comment_info[:thumbnail] = image_path('group_forum_default_thumb.jpg') %>
-		<% end -%>
-			<%= render :partial => '/forum/img_with_progress_spinner', :locals => { :src => comment_info[:thumbnail], :alt => 'thumbnail', :klass => "FH_post_image", :width => 50, :height => 125 } %>
-			</div>
-			<div class="right_of_thumbnail exhibit_link">
-				<div class="group_thread_title"><%= link_to(thread.get_title(), { :controller => 'forum', :action => 'view_thread', :thread => thread.id }, :class => 'nav_link') %></div>
-				Last updated by <%= get_user_link(comment_info[:last_comment_author]) %><br /><%= comment_time_format_relative(comment_info[:last_comment_time]) %>
-			</div>
-		</div>
-		</li>
+      <% if thread.discussion_comments -%>
+        <li>
+          <% comment_info = get_comment_header_info(thread.discussion_comments[0]) -%>
+          <div class="thumbnail_item">
+            <div class="left_thumbnail">
+              <% if comment_info[:thumbnail] == nil -%>
+                <% comment_info[:thumbnail] = image_path('group_forum_default_thumb.jpg') %>
+              <% end -%>
+              <%= render :partial => '/forum/img_with_progress_spinner', :locals => { :src => comment_info[:thumbnail], :alt => 'thumbnail', :klass => "FH_post_image", :width => 50, :height => 125 } %>
+            </div>
+            <div class="right_of_thumbnail exhibit_link">
+            <div class="group_thread_title">
+              <%= link_to(thread.get_title(), { :controller => 'forum', :action => 'view_thread', :thread => thread.id }, :class => 'nav_link') %></div>
+              Last updated by <%= get_user_link(comment_info[:last_comment_author]) %><br /><%= comment_time_format_relative(comment_info[:last_comment_time]) %>
+            </div>
+          </div>
+        </li>
+      <% end -%>
 		<% end # for each thread -%>
 	</ul>
 <% end # can read forum -%>
