@@ -486,7 +486,7 @@ class CachedResource < ActiveRecord::Base
 		end
 
 	def self.field_has_value(field)
-		return false if field == nil
+		return false if field.nil?
 		if field.class == 'String'
 			return field.length > 0
 		end
@@ -495,7 +495,7 @@ class CachedResource < ActiveRecord::Base
 
 	def self.sort_algorithm(results, field)
 			results = results.sort { |a,b|
-				if field_has_value(a[field]) && field_has_value(b[field])
+				if field_has_value(a[field]) && field_has_value(b[field]) && a[field].class == b[field].class
 					a[field] <=> b[field]
 				elsif field_has_value(a[field])
 					1 <=> 2
