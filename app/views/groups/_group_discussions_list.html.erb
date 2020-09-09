@@ -42,7 +42,7 @@ Private: Only group members may read and respond to private discussions.</span><
 		</li>
 	<% end #if can post -%>
 	<% for thread in threads -%>
-      <% if thread.discussion_comments -%>
+      <% if thread.discussion_comments[0] -%>
         <li>
           <% comment_info = get_comment_header_info(thread.discussion_comments[0]) -%>
           <div class="thumbnail_item">
